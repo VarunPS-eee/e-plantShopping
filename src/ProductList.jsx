@@ -274,8 +274,28 @@ function ProductList({ onHomeClick }) {
             </div>
             {!showCart ? (
                 <div className="product-grid">
+                    {plantsArray.map((item, index) => {
+                        const category = item.category;
+                        const plants = item.plants;
 
-
+                        return (
+                            <div key={index}>
+                                <h1><div>{category}</div></h1>
+                                <div className="product-list">
+                                    {plants.map((plantItem, plantIndex) => {
+                                        return (
+                                            <div className="product-card" key={plantIndex}>
+                                                <img className="product-image" src={plantItem.image} alt={plantItem.name} />
+                                                <div className="product-title">{plantItem.name}</div>
+                                                {/*Similarly like the above plant.name show other details like description and cost*/}
+                                                <button className="product-button" onClick={() => handleAddToCart(plantItem)}>Add to Cart</button>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )
+                    })}
                 </div>
             ) : (
                 <CartItem onContinueShopping={handleContinueShopping} />
